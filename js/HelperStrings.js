@@ -1,0 +1,25 @@
+"use strict";
+
+//Strings used to retrieve objects from the view / storing classes from css file
+const ACTIVECATEGORYCLASS = "categoryButtonActive",
+    ACTIVECATEGORYFIELD = "selectedCategory",
+    BADINPUTS = "Ungültige Eingabe",
+    SUCCESS = "success",
+    CATEGORIES = "SavedCategories",
+    CATEGORYBUTTON = "categoryButton",
+    CATEGORYLIST = "categoryList",
+    CATEGORYNAMELABEL = "categoryNameLabel",
+    CATEGORYTASKAMOUNTLABEL = "categoryTaskAmountLabel",
+    FINISHEDTASKLIST = "finishedTaskList",
+    HIGHLIGHTED = "highlighted",
+    LOADAMOUNT = "loadMoreAmount",
+    NEWCATEGORYINPUT = "newCategoryInput",
+    NEWTASKINPUT = "newTaskInput",
+    SEARCHTEXT = "searchText",
+    SHOWFINISHEDTASKS = "showFinishedTasks",
+    TASKPOPUP = "TaskPopup",
+    TASKPOPUPDEADLINE = "taskPopupDeadline",
+    TASKPOPUPDESCRIPTION = "taskPopupDescription",
+    TASKPOPUPNAME = "taskPopupName",
+    TASKS = "SavedTasks",
+    UNFINISHEDTASKLIST = "unfinishedTaskList";

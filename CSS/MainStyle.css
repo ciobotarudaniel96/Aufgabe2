@@ -1,0 +1,280 @@
+ul {
+    list-style: none;
+    /*Remove space taken up by list items*/
+    margin: 0px;
+    padding: 0px;
+}
+
+button {
+    border-radius: 2px;
+    border: solid 1px;
+    border-color: rgb(173, 178, 184);
+    overflow: hidden;
+}
+
+.headerContainer {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.mainContentContainer {
+    padding-top: 50px;
+    display: grid;
+    grid-template-columns: 25% 5% 70%;
+    grid-template-rows: 100%;
+}
+
+.fixedMenu {
+    color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgb(61, 139, 205);
+    justify-content: space-between;
+}
+
+.flexBox{
+    display: flex;
+}
+
+.menuTitle {
+    font-size: large;
+    align-items: center;
+}
+
+.menuSearchBar {
+    align-items: center;
+}
+
+.searchBox {
+    height: 30px;
+    width: 320px;
+    border-radius: 2px;
+    margin-right: 20px;;
+}
+
+.categories {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.tasks {
+    grid-row: 1;
+    grid-column: 3;
+}
+
+.taskList {
+    border: solid 1px;
+    border-color: blue;
+    background-color: rgb(218, 232, 252);
+}
+
+.taskList li {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.taskButton {
+    border: solid 1px;
+    width: 95%;
+    color: black;
+    background: white;
+    height: 35px;
+    text-align: start;
+}
+
+.categoryButton {
+    width: 100%;
+    border: none;
+    height: 30px;
+    font-size: 15px;
+    color: rgb(61, 139, 205);
+    background: white;
+    display: grid;
+    grid-template-columns: 90% 10%;
+    margin-top: 3px;
+}
+
+label {
+    align-self: center;
+}
+
+.categoryNameLabel {
+    text-align: start;
+    grid-column: 1;
+}
+
+.categoryTaskAmountLabel {
+    align-self: center;
+    grid-column: 2;
+    border-radius: 10px;
+}
+
+.categoryButtonActive {
+    color: white !important;
+    background: rgb(61, 139, 205) !important;
+}
+
+.categoryButton .categoryTaskAmountLabel {
+    background: gray;
+    color: white;
+}
+
+.categoryButtonActive .categoryTaskAmountLabel {
+    color: rgb(61, 139, 205);
+    background: white;
+}
+
+.loadMoreButton {
+    width: 100%;
+    background: rgb(61, 139, 205);
+    color: white;
+}
+
+.toggleFinishedTasksButton {
+    width: 100%;
+    background: rgb(100, 118, 135);
+    color: white;
+}
+
+.textInput {
+    width: 98%;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.taskTextInput {
+    height: 35px;
+}
+
+.categoryTextInput {
+    height: 30px;
+    margin-top: 10px;
+}
+
+.finishedTaskList li button {
+    color: gray;
+    text-decoration: line-through;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(78, 78, 78, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+
+    background-color: white;
+    width: 35%;
+    max-width: 400px;
+    min-width: 300px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px black;
+    border: solid 1px;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 10% 40% 40% 10%;
+    overflow: auto;
+    animation-name: popupFadeIn;
+    animation-duration: 350ms;
+}
+
+@keyframes popupFadeIn {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+.popup-body {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row: 1;
+}
+
+.popup-footer {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row: 2;
+    align-content: flex-end;
+    margin-bottom: 10px;
+}
+
+textarea {
+    resize: none;
+}
+
+.popupTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.popup-footer button,
+.popup-footer input[type=submit] {
+    border-radius: 5px;
+    border: none;
+    height: 25px;
+}
+
+.popup-footer button:hover,
+.popup-footer input[type=submit]:hover {
+    transform: scale(1.2);
+}
+
+.popupSaveButton {
+    background: rgb(0, 87, 216);
+    color: white;
+}
+
+.popupCloseButton {
+    color: rgb(0, 87, 216);
+}
+
+.popup-body textarea,
+.popup-body input {
+    background: rgb(247, 248, 249);
+    border-radius: 5px;
+    border: 1px solid;
+    color: rgb(117, 128, 149);
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.popup-body label {
+    font-weight: bold;
+    color: rgb(77, 85, 99);
+}
+
+.highlighted {
+    animation-name: highlightedAnimation;
+    animation-duration: 2000ms;
+    animation-iteration-count: infinite;
+}
+
+@keyframes highlightedAnimation {
+    0% {
+        color: white;
+        background: rgb(61, 139, 205);
+    }
+    50% {
+        color: rgb(61, 139, 205);
+        background: white;
+    }
+    100% {
+        color: white;
+        background: rgb(61, 139, 205);
+    }
+}

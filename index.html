@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Aufgabesite
+	</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="CSS/MainStyle.css" type="text/css" />
+	<script src="js/CategoryFunctions.js"></script>
+	<script src="js/ControlIdHelper.js"></script>
+	<script src="js/DisplayProperties.js"></script>
+	<script src="js/HelperClasses.js"></script>
+	<script src="js/HelperStrings.js"></script>
+	<script src="js/Home.js"></script>
+	<script src="js/InputValidations.js"></script>
+	<script src="js/PageControls.js"></script>
+	<script src="js/PopupFunctions.js"></script>
+	<script src="js/SearchFunctions.js"></script>
+	<script src="js/ServerRequests.js"></script>
+	<script src="js/TaskFunctions.js"></script>
+
+</head>
+
+<body>
+	<header>
+		<div class="flexBox fixedMenu">
+			<div class="flexBox">
+				<div class="flexBox"><img src="cog.png"></div>
+				<div class="flexBox menuTitle">Meine Aufgaben</div>
+			</div>
+			<div class="flexBox menuSearchBar"><input type="text" id="searchText" placeholder="Suche" class="searchBox"></div>
+
+		</div>
+	</header>
+	<main class="mainContentContainer">
+		<form onsubmit="SaveNewCategoryClicked()">
+			<div class="categories">
+				<ul id="categoryList">
+				</ul>
+			</div>
+			<input type="text" id="newCategoryInput" class="textInput categoryTextInput" placeholder="+ hinzufügen">
+		</form>
+		<div class="tasks">
+			<form onsubmit="SaveNewTaskClicked()">
+				<ul class="taskList">
+					<li>
+						<input type="text" id="newTaskInput" class="textInput taskTextInput"
+							placeholder="+ Eine Aufgabe hinzufügen">
+					</li>
+					<li id="unfinishedTaskList">
+					</li>
+					<li>
+						<button type="button" class="loadMoreButton" onclick="increaseTaskLoadAmount()">
+							mehr laden
+						</button>
+					</li>
+					<li>
+						<button type="button" class="toggleFinishedTasksButton" onclick="toggleFinishedTasks()">
+							erledigte ausblenden/anzeigen
+						</button>
+					</li>
+					<li id="finishedTaskList" class="finishedTaskList">
+					</li>
+				</ul>
+			</form>
+		</div>
+	</main>
+	<side>
+		<form onsubmit="saveTaskChanges()">
+			<div id="TaskPopup" class="popup">
+
+				<div class="popup-content">
+					<div class="popup-body">
+						<div class="popupTitle">Zusatzinformationen</div>
+						<br>
+						<label for="taskPopupName">Titel</label>
+						<br>
+						<input type="text" class="textInput" id="taskPopupName">
+						<br>
+						<label for="taskPopupDeadline">Fälligkeitsdatum</label>
+						<br>
+						<input type="datetime-local" id="taskPopupDeadline">
+						<br>
+						<label for="taskPopupDescription">Beschreibung</label>
+						<br>
+						<textarea type="text" class="textInput" id="taskPopupDescription" maxlength="500">
+						</textarea>
+					</div>
+					<div class=popup-footer>
+						<input type="submit" value="Speichern" class="popupSaveButton">
+						<button type="button" onclick="closeTaskPopup()">Schließen</button>
+					</div>
+				</div>
+
+			</div>
+		</form>
+	</side>
+</body>
+
+</html>
