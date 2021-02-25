@@ -3,10 +3,10 @@
 //display settings which can be influenced by the user
 var PageDisplayData = {
     get ActiveCategory() {
-        return sessionStorage.getItem(ACTIVECATEGORYFIELD);
+        return  sessionStorage.getItem(ACTIVECATEGORYFIELD)?JSON.parse(sessionStorage.getItem(ACTIVECATEGORYFIELD)):null;
     },
     set ActiveCategory(activeCategory) {
-        sessionStorage.setItem(ACTIVECATEGORYFIELD, activeCategory);
+        sessionStorage.setItem(ACTIVECATEGORYFIELD, JSON.stringify(activeCategory));
     },
     get loadMoreAmount() {
         return JSON.parse(sessionStorage.getItem(LOADAMOUNT));

@@ -17,8 +17,14 @@ var PageInputs = {
     get NewCategoryInput() {
         return document.getElementById(NEWCATEGORYINPUT).value;
     },
-    get newTaskInput() {
+    set NewCategoryInput(value) {
+        document.getElementById(NEWCATEGORYINPUT).value=value;
+    },
+    get NewTaskInput() {
         return document.getElementById(NEWTASKINPUT).value;
+    },
+    set NewTaskInput(value) {
+        document.getElementById(NEWTASKINPUT).value=value;
     },
     get taskPopup() {
         return document.getElementById(TASKPOPUP);

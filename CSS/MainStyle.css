@@ -12,19 +12,14 @@ button {
     overflow: hidden;
 }
 
-.headerContainer {
-    grid-row: 1;
-    grid-column: 1;
-}
-
-.mainContentContainer {
+.main-content-container {
     padding-top: 50px;
     display: grid;
     grid-template-columns: 25% 5% 70%;
     grid-template-rows: 100%;
 }
 
-.fixedMenu {
+.fixed-menu {
     color: white;
     position: fixed;
     top: 0;
@@ -33,20 +28,20 @@ button {
     justify-content: space-between;
 }
 
-.flexBox{
+.flex-box{
     display: flex;
 }
 
-.menuTitle {
+.menu-title {
     font-size: large;
     align-items: center;
 }
 
-.menuSearchBar {
+.menu-search-bar {
     align-items: center;
 }
 
-.searchBox {
+.search-box {
     height: 30px;
     width: 320px;
     border-radius: 2px;
@@ -63,20 +58,20 @@ button {
     grid-column: 3;
 }
 
-.taskList {
+.task-list {
     border: solid 1px;
     border-color: blue;
     background-color: rgb(218, 232, 252);
 }
 
-.taskList li {
+.task-list li {
     margin-top: 4px;
     margin-bottom: 4px;
     margin-left: 4px;
     margin-right: 4px;
 }
 
-.taskButton {
+.task-button {
     border: solid 1px;
     width: 95%;
     color: black;
@@ -85,7 +80,7 @@ button {
     text-align: start;
 }
 
-.categoryButton {
+.category-button {
     width: 100%;
     border: none;
     height: 30px;
@@ -101,60 +96,60 @@ label {
     align-self: center;
 }
 
-.categoryNameLabel {
+.category-name-label {
     text-align: start;
     grid-column: 1;
 }
 
-.categoryTaskAmountLabel {
+.category-task-amount-label {
     align-self: center;
     grid-column: 2;
     border-radius: 10px;
 }
 
-.categoryButtonActive {
+.category-button-active {
     color: white !important;
     background: rgb(61, 139, 205) !important;
 }
 
-.categoryButton .categoryTaskAmountLabel {
+.category-button .category-task-amount-label {
     background: gray;
     color: white;
 }
 
-.categoryButtonActive .categoryTaskAmountLabel {
+.category-button-active .category-task-amount-label {
     color: rgb(61, 139, 205);
     background: white;
 }
 
-.loadMoreButton {
+.load-more-button {
     width: 100%;
     background: rgb(61, 139, 205);
     color: white;
 }
 
-.toggleFinishedTasksButton {
+.toggle-finished-tasks-button {
     width: 100%;
     background: rgb(100, 118, 135);
     color: white;
 }
 
-.textInput {
+.text-input {
     width: 98%;
     border-radius: 5px;
     border: 1px solid;
 }
 
-.taskTextInput {
+.task-text-input {
     height: 35px;
 }
 
-.categoryTextInput {
+.category-text-input {
     height: 30px;
     margin-top: 10px;
 }
 
-.finishedTaskList li button {
+.finished-task-list li button {
     color: gray;
     text-decoration: line-through;
 }
@@ -216,7 +211,7 @@ textarea {
     resize: none;
 }
 
-.popupTitle {
+.popup-title {
     font-size: 20px;
     font-weight: bold;
     margin-top: 20px;
@@ -234,12 +229,12 @@ textarea {
     transform: scale(1.2);
 }
 
-.popupSaveButton {
+.popup-save-button {
     background: rgb(0, 87, 216);
     color: white;
 }
 
-.popupCloseButton {
+.popup-close-button {
     color: rgb(0, 87, 216);
 }
 
@@ -259,12 +254,12 @@ textarea {
 }
 
 .highlighted {
-    animation-name: highlightedAnimation;
+    animation-name: highlighted-animation;
     animation-duration: 2000ms;
     animation-iteration-count: infinite;
 }
 
-@keyframes highlightedAnimation {
+@keyframes highlighted-animation {
     0% {
         color: white;
         background: rgb(61, 139, 205);

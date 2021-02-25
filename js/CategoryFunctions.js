@@ -21,17 +21,22 @@ function SelectCategory(categoryId, resetLoadAmount) {
 }
 
 //saves a new category, page refresh happens at the end
-function SaveNewCategoryClicked() {
+async function SaveNewCategoryClicked() {
+    let retStatus="";
     if (validateName(PageInputs.NewCategoryInput)) {
-        let status = SaveDesiredCategory(PageInputs.NewCategoryInput);
-        if (status != SUCCESS) {
-            alert(status);
+        const result = await SaveDesiredCategory(PageInputs.NewCategoryInput);
+        if (result != SUCCESS) {
+            alert(result);
         }
+        return result;
     } else {
-        alert(BADINPUTS);
+        return new Promise(function(resolve){
+            alert(BADINPUTS);
+            resolve(BADINPUTS);            
+        })
+
     }
     //refresh not necessary since a postback happens on submits
-
 }
 
 //creates a category list item and its children and returns it
@@ -44,18 +49,18 @@ function CreateCategory(category) {
     newcategoryButton.setAttribute("Id", ControlNames.CategoryButton(category.Id));
     newcategoryButton.setAttribute("type", "button");
     newcategoryButton.addEventListener("click", function () { SelectCategory(category.Id, true) }, false);
-    newcategoryButton.classList.add(CATEGORYBUTTON);
+    newcategoryButton.classList.add(CATEGORYBUTTONCLASS);
 
     //name label
     let categoryNameLabel = document.createElement("label");
     categoryNameLabel.setAttribute("Id", ControlNames.CategoryNameLabel(category.Id));
-    categoryNameLabel.classList.add(CATEGORYNAMELABEL);
+    categoryNameLabel.classList.add(CATEGORYNAMELABELCLASS);
     categoryNameLabel.textContent = category.Name;
 
     //number of tasks label
     let taskAmountLabel = document.createElement("label");
     taskAmountLabel.setAttribute("Id", ControlNames.CategoryRemainingTasksLabel(category.Id));
-    taskAmountLabel.classList.add(CATEGORYTASKAMOUNTLABEL);
+    taskAmountLabel.classList.add(CATEGORYTASKAMOUNTLABELCLASS);
     if (CountIncompleteTasksForCategory(category.Id) != 0) {
         taskAmountLabel.textContent = CountIncompleteTasksForCategory(category.Id);
     }
@@ -80,10 +85,3 @@ function CountIncompleteTasksForCategory(categoryId) {
     return TasksForCategory;
 }
 
-//creates and saves a category
-function SaveDesiredCategory(categoryName) {
-    let categories = GetCategories();
-    let newCateg = new Category(Date.now(), categoryName);
-    categories.push(newCateg);
-    return SaveCategories(categories);
-}

@@ -1,0 +1,8 @@
+var ServerRequestType=
+{
+    GETCATEGORIES:1,
+    GETTASKS:2,
+    SAVENEWCATEGORY:3,
+    SAVENEWTASK:4,
+    MODIFYTASK:5
+}

@@ -1,15 +1,15 @@
 "use strict";
 
 //Strings used to retrieve objects from the view / storing classes from css file
-const ACTIVECATEGORYCLASS = "categoryButtonActive",
+const ACTIVECATEGORYCLASS = "category-button-active",
     ACTIVECATEGORYFIELD = "selectedCategory",
     BADINPUTS = "Ungültige Eingabe",
     SUCCESS = "success",
     CATEGORIES = "SavedCategories",
-    CATEGORYBUTTON = "categoryButton",
+    CATEGORYBUTTONCLASS = "category-button",
     CATEGORYLIST = "categoryList",
-    CATEGORYNAMELABEL = "categoryNameLabel",
-    CATEGORYTASKAMOUNTLABEL = "categoryTaskAmountLabel",
+    CATEGORYNAMELABELCLASS = "category-name-label",
+    CATEGORYTASKAMOUNTLABELCLASS = "category-task-amount-label",
     FINISHEDTASKLIST = "finishedTaskList",
     HIGHLIGHTED = "highlighted",
     LOADAMOUNT = "loadMoreAmount",
@@ -22,4 +22,6 @@ const ACTIVECATEGORYCLASS = "categoryButtonActive",
     TASKPOPUPDESCRIPTION = "taskPopupDescription",
     TASKPOPUPNAME = "taskPopupName",
     TASKS = "SavedTasks",
-    UNFINISHEDTASKLIST = "unfinishedTaskList";
+    UNFINISHEDTASKLIST = "unfinishedTaskList",
+    GET = "GET",
+    POST = "POST";

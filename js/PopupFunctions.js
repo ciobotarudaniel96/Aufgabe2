@@ -29,7 +29,14 @@ function saveTaskChanges() {
     Tasks[activeTaskIndex].Description = PageInputs.taskPopupDescription;
     Tasks[activeTaskIndex].Deadline = PageInputs.taskPopupDeadline;
     Tasks[activeTaskIndex].Name = PageInputs.taskPopupName;
-    SaveTasks(Tasks);
+    SaveModifiedTask(Tasks[activeTaskIndex])
+    .then(function(response){
+        if(response!=SUCCESS){
+            alert(response);
+
+        }
+        return response;
+    });
 
 }
 

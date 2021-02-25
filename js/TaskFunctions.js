@@ -4,25 +4,49 @@
 function TaskCheckboxClicked(taskId) {
     let taskIndex = Tasks.findIndex(task => task.Id == taskId);
     Tasks[taskIndex].completed = !(Tasks[taskIndex].completed);
-    SaveTasks(Tasks);
-    //move the element to complete tasks list
-    if (Tasks[taskIndex].completed) {
-        let domTask = document.getElementById(ControlNames.TaskListItem(taskId));
-        let domTaskCheckBox = document.getElementById(ControlNames.TaskCheckbox(taskId));
-        domTaskCheckBox.style.display = "none";
-        PageContainers.IncompleteTaskList.removeChild(domTask);
-        PageContainers.CompleteTaskList.appendChild(domTask);
-        //update tasks remaining for the category
-        let categoryLabel = document.getElementById(ControlNames.CategoryRemainingTasksLabel(Tasks[taskIndex].Category));
-        let tasksLeftForCategory = CountIncompleteTasksForCategory(Tasks[taskIndex].Category);
-        if (tasksLeftForCategory == 0) {
-            categoryLabel.textContent = "";
-        } else {
-            categoryLabel.textContent = tasksLeftForCategory;
+    return SaveModifiedTask(Tasks[taskIndex]).then(function (response) {
+        if (response != SUCCESS) {
+            alert(response);
+            return response;
         }
-    } else {
-        //not necessary at the moment, since finished tasks cant be marked as "incomplete"
-    }
+        //move the element to complete tasks list
+        if (Tasks[taskIndex].completed) {
+            let domTask = document.getElementById(ControlNames.TaskListItem(taskId));
+            let domTaskCheckBox = document.getElementById(ControlNames.TaskCheckbox(taskId));
+            domTaskCheckBox.style.display = "none";
+            PageContainers.IncompleteTaskList.removeChild(domTask);
+            //find the newest complete task before the modified one
+            let prependIndex = 0;
+            //exclude itself from the count
+            let completeTasks = -1;
+            Tasks.forEach(task => {
+                if (task.Category == PageDisplayData.ActiveCategory && task.completed && task.Id != Tasks[taskIndex]) {
+                    completeTasks++;
+                    if (task.Id < Tasks[taskIndex].Id) {
+                        prependIndex++;
+                    }
+                }
+            })
+            if (completeTasks == prependIndex) {
+                PageContainers.CompleteTaskList.appendChild(domTask);
+            }
+            else {
+                PageContainers.CompleteTaskList.insertBefore(domTask, PageContainers.CompleteTaskList.childNodes[prependIndex + 1]);
+            }
+            //update tasks remaining for the category
+            let categoryLabel = document.getElementById(ControlNames.CategoryRemainingTasksLabel(Tasks[taskIndex].Category));
+            let tasksLeftForCategory = CountIncompleteTasksForCategory(Tasks[taskIndex].Category);
+            if (tasksLeftForCategory == 0) {
+                categoryLabel.textContent = "";
+            } else {
+                categoryLabel.textContent = tasksLeftForCategory;
+            }
+        } else {
+            //not necessary at the moment, since finished tasks cant be marked as "incomplete"
+        }
+        return response;
+    })
+
 }
 
 //shows the first x tasks, x being 10 * how many times the user clicked load more + 1
@@ -32,35 +56,36 @@ function ShowTasks(categoryId, amountMultiplier) {
         if (task.Category == categoryId) {
             let domTask = document.getElementById(ControlNames.TaskListItem(task.Id));
             domTask.style.display = "list-item";
-            numberOfVisibleTasks++;
+            if (!task.completed) {
+                numberOfVisibleTasks++;
+            }
         }
 }
 
 //saves a new task, page refresh happens at the end
 function SaveNewTaskClicked() {
-    if (PageDisplayData.ActiveCategory == null || Categories.length == 0) {
-        alert("Keine Kathegorie gewählt");
-        return;
+    if (PageDisplayData.ActiveCategory == "null" || Categories.length == 0) {
+        return new Promise(function(resolve,reject){
+            alert("Keine Kathegorie gewählt");
+            resolve("Keine Kathegorie gewählt");
+        });
     }
-    if (validateName(PageInputs.newTaskInput)) {
-        let status = SaveDesiredTask(PageInputs.newTaskInput, PageDisplayData.ActiveCategory);
-        if (status != SUCCESS) {
-            alert(status);
-        }
+    if (validateName(PageInputs.NewTaskInput)) {
+        return SaveDesiredTask(PageInputs.NewTaskInput, PageDisplayData.ActiveCategory)
+            .then(function (result) {
+                if (result != SUCCESS) {
+                    alert(result);
+                }
+              return result;  
+            })
     }
     else {
-        alert(BADINPUTS);
+        return new Promise(function(resolve,reject){
+            alert(BADINPUTS);
+            resolve(BADINPUTS);
+        });
     }
     //refresh not necessary since a postback happens on submits
-}
-
-//creates and saves a Task
-function SaveDesiredTask(taskName, taskCategory) {
-    let tasks = GetTasks();
-    let newTask = new Task(Date.now(), taskName, taskCategory, "", null, false);
-    tasks.push(newTask);
-    return SaveTasks(tasks);
-
 }
 
 function HideAllTasks() {
@@ -95,7 +120,7 @@ function CreateTask(task, hidden) {
     newTaskButton.setAttribute("Id", ControlNames.TaskButton(task.Id));
     newTaskButton.setAttribute("type", "button");
     newTaskButton.addEventListener("click", function () { TaskClicked(task.Id) }, false);
-    newTaskButton.classList.add("taskButton");
+    newTaskButton.classList.add("task-button");
     newTaskButton.appendChild(document.createTextNode(task.Name));
     newTask.appendChild(newTaskButton);
     return newTask;
